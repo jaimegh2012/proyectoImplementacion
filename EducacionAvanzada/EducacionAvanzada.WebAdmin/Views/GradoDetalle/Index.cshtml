@@ -1,0 +1,61 @@
+﻿@model EducacionAvanzada.BL.Profesor
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Grados Impartidos por Profesor </h2>
+<h3>@ViewBag.nombreProfesor</h3>
+<p>
+    @Html.ActionLink("Nuevo Grado", "Crear", "GradoDetalle", new { profesorId = ViewBag.profesorId }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Profesor
+        </th>
+        <th>
+            Grado
+        </th>
+        <th>
+            Seccion
+        </th>
+        <th>
+            Jornada
+        </th>
+        <th>
+            Año
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.ListadeGradosPorProfesor) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Profesor.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grado.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.seccion.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jornada.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Anio)
+        </td>
+
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=item.Id }, null) |
+            @Html.ActionLink("Eliminar", "Eliminar", new { id=item.Id }) |
+            @Html.ActionLink("Ver Materias", "Index", "MateriaDetalle", new { gradoDetalleId = item.Id }, null)
+        </td>
+    </tr>
+    
+}
+   
+
+</table>
+@Html.ActionLink("Regresar a Lista de Profesores", "Index", "Profesores")

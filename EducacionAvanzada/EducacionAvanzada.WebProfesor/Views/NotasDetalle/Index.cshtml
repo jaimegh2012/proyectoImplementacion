@@ -1,0 +1,72 @@
+﻿@model EducacionAvanzada.BL.Alumno
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.profeId = ViewBag.profesorId;
+}
+
+<h2>Notas por Materia</h2>
+
+<p>
+    @Html.ActionLink("Registrar Nota", "Crear", "NotasDetalle", new { notaId = ViewBag.notaId, alumnoId = ViewBag.alumnoid, profesorId = ViewBag.profesorId}, null)
+</p>
+<table class="table">
+    <tr>
+        
+        <th>
+            Nombre
+        </th>
+        <th>
+            Materia
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrimerParcial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SegundoParcial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TercerParcial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CuartoParcial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NotaFinal)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.ListadeNotas) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Alumno.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Materia.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrimerParcial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SegundoParcial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TercerParcial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CuartoParcial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NotaFinal)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { notaDetalleId=item.Id, alumnoId=item.AlumnoId, materiaId=item.MateriaId, profesorId = ViewBag.profesorId})
+        </td>
+    </tr>
+}
+
+</table>
+
+@Html.ActionLink("Regresar a Lista de Alumnos", "Index", "AlumnosPorGrado", new { gradoId = Model.GradoId, seccionId = Model.SeccionId, Model.JornadaId, notaId = ViewBag.notaId, profesorId = ViewBag.profesorId }, null)

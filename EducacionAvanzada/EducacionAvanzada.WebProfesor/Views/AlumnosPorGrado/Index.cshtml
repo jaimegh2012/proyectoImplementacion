@@ -1,0 +1,41 @@
+﻿@model IEnumerable<EducacionAvanzada.BL.Alumno>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.profeId = ViewBag.profesorId;
+}
+
+<h2>Alumnos</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        
+        <th>
+            Imagen
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        
+        <td>
+            <img src="@(ViewBag.adminWebsiteUrl + item.UrlImagen)" alt="@item.Nombre" style="width:64px; height: auto; " />
+        </td>
+        <td>
+            @Html.ActionLink("Ver Notas", "Index", "NotasDetalle", new { notaId=ViewBag.notaId, alumnoId=item.Id, profesorId=ViewBag.profesorId }, null)
+        </td>
+    </tr>
+}
+
+</table>
+
+@Html.ActionLink("Regresar a Grados", "Index", "Notas", new { id=ViewBag.profesorId}, null)

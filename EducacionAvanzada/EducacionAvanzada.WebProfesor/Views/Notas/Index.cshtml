@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EducacionAvanzada.BL.Notas>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.profeId = @ViewBag.profesorId;
+}
+
+<h2>Grados Impartidos</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Grado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Jornada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.seccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anio)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grado.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Jornada.Descripcion)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.seccion.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Anio)
+        </td>
+        <td>
+            @Html.ActionLink("Ver Alumnos", "Index", "AlumnosPorGrado", new { gradoId = item.GradoId, seccionId = item.SeccionId, jornadaId = item.JornadaId, notaId = item.Id, profesorId = ViewBag.profesorId }, null)
+        </td>
+    </tr>
+}
+
+</table>

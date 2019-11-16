@@ -1,0 +1,45 @@
+﻿@model IEnumerable<EducacionAvanzada.BL.Profesor>
+
+@{
+    ViewBag.Title = "Profesores";
+}
+
+<h2>Profesores</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Profesor", "Crear")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Activo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activo)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Editar", new { id=item.Id }) |
+            @Html.ActionLink("Ver Grados", "Index", "GradoDetalle", new { profesorId = item.Id }, null)
+        </td>
+    </tr>
+}
+
+</table>
